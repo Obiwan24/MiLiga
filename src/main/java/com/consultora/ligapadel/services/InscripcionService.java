@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InscripcionService {
 
@@ -41,13 +43,23 @@ public class InscripcionService {
         Liga liga = ligaRepository.findById(ligaId)
                 .orElseThrow(() -> new RuntimeException("Error: La liga con ID " + ligaId + " no existe."));
 
+
+
         //Crea el objeto de la tabla intermedia y asociamos las relaciones
         JugadoresLiga nuevaInscripcion = new JugadoresLiga();
         nuevaInscripcion.setJugador(jugador);
         nuevaInscripcion.setEquipo(equipo);
         nuevaInscripcion.setLiga(liga);
 
-        //Guardamos en la BBDD
-        return jugadoresLigaRepository.save(nuevaInscripcion);
+        //Guardamos en la BBDD si no esta repetido
+        if (jugadoresLigaRepository.existsByJugadorAndLiga(jugador, liga)) {
+            throw new IllegalArgumentException("El jugador ya existe en la liga seleccionada");
+        }
+
+            return jugadoresLigaRepository.save(nuevaInscripcion);
+    }
+
+    public List<JugadoresLiga> buscarTodos() {
+        return jugadoresLigaRepository.findAll();
     }
 }

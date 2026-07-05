@@ -58,35 +58,35 @@ public class Jugador {
         this.dni = dni;
     }
 
-    public int getjGanados() {
+    public int getJGanados() {
         return jGanados;
     }
 
-    public void setjGanados(int jGanados) {
+    public void setJGanados(int jGanados) {
         this.jGanados = jGanados;
     }
 
-    public int getjPerdidos() {
+    public int getJPerdidos() {
         return jPerdidos;
     }
 
-    public void setjPerdidos(int jPerdidos) {
+    public void setJPerdidos(int jPerdidos) {
         this.jPerdidos = jPerdidos;
     }
 
-    public int getpGanados() {
+    public int getPGanados() {
         return pGanados;
     }
 
-    public void setpGanados(int pGanados) {
+    public void setPGanados(int pGanados) {
         this.pGanados = pGanados;
     }
 
-    public int getpPerdidos() {
+    public int getPPerdidos() {
         return pPerdidos;
     }
 
-    public void setpPerdidos(int pPerdidos) {
+    public void setPPerdidos(int pPerdidos) {
         this.pPerdidos = pPerdidos;
     }
 

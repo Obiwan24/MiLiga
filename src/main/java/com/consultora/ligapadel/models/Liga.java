@@ -20,10 +20,10 @@ public class Liga {
     private String ambito;
 
     @Column(name = "numero_equipos")
-    private int numeroEquipos;
+    private int numeroEquipos = 0;
 
     @Column(name = "numero_jugadores")
-    private int numeroJugadores;
+    private int numeroJugadores = 0;
 
     @Column(name = "fecha_inicio_inscripcion")
     private LocalDate fechaInicioInscr;

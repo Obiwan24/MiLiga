@@ -16,28 +16,28 @@ public class Equipo {
     private String nombreEquipo;
 
     @Column(name="num_jugadores")
-    private int numJugadores;
+    private int numJugadores = 0;
 
     @Column(name="sede")
     private String sede;
 
     @Column(name="puntos")
-    private int puntos;
+    private int puntos = 0;
 
     @Column(name="penalizacion")
-    private int penalizacion;
+    private int penalizacion = 0;
 
     @Column(name="j_ganados")
-    private int jGanados;
+    private int jGanados = 0;
 
     @Column(name="j_perdidos")
-    private int jPerdidos;
+    private int jPerdidos = 0;
 
     @Column(name="p_ganados")
-    private int pGanados;
+    private int pGanados = 0;
 
     @Column(name="p_perdidos")
-    private int pPerdidos;
+    private int pPerdidos = 0;
 
     @ManyToOne
     @JoinColumn(name="id_liga")

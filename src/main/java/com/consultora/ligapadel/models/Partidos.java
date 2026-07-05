@@ -19,16 +19,16 @@ public class Partidos {
     private String eqVisitante;
 
     @Column(name="j_local")
-    private int jLocal;
+    private int jLocal = 0;
 
     @Column(name="j_visitante")
-    private int jVisitante;
+    private int jVisitante = 0;
 
     @Column(name="set_local")
-    private int setLocal;
+    private int setLocal = 0;
 
     @Column(name="set_visitante")
-    private int setVisitante;
+    private int setVisitante = 0;
 
     @Column(name="ganador")
     private String ganador;
@@ -37,7 +37,7 @@ public class Partidos {
     private Date fecha;
 
     @Column(name="jornada")
-    private int jornada;
+    private int jornada = 1;
 
     //Getters y Setters
 
