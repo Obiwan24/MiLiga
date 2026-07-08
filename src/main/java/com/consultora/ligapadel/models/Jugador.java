@@ -1,5 +1,7 @@
 package com.consultora.ligapadel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,6 +31,7 @@ public class Jugador {
     private int pPerdidos;
 
     @ManyToOne
+    @JsonIgnore //Evitar bucles en la salida JSON
     @JoinColumn(name="id_Equipo")
     private Equipo equipo;
 

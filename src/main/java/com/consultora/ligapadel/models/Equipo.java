@@ -1,5 +1,7 @@
 package com.consultora.ligapadel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -40,6 +42,7 @@ public class Equipo {
     private int pPerdidos = 0;
 
     @ManyToOne
+    @JsonIgnore //Evitar bucles en la salida JSON
     @JoinColumn(name="id_liga")
     private Liga liga;
 
