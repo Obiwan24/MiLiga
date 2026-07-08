@@ -43,12 +43,16 @@ public class InscripcionService {
         Liga liga = ligaRepository.findById(ligaId)
                 .orElseThrow(() -> new RuntimeException("Error: La liga con ID " + ligaId + " no existe."));
 
-        //Modifica contador de numero de jugadores
+        //Modifica contador de numero de jugadores y equipos
         int jugadoresActuales = equipo.getNumJugadores();
+        int jugadoresLigaActuales = liga.getNumeroJugadores();
+
         equipo.setNumJugadores(jugadoresActuales + 1);
+        liga.setNumeroJugadores(jugadoresLigaActuales + 1);
 
         //El repositorio de equipos guarda el equipo con el nuevo numero
         equipoRepository.save(equipo);
+        ligaRepository.save(liga);
 
         //Crea inscripcion del jugador
         //Crea el objeto de la tabla intermedia y asociamos las relaciones
