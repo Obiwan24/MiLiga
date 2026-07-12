@@ -36,4 +36,25 @@ public class JugadoresController {
     public List<Jugador> listarJugadores(){
         return jugadorRepository.findAll();
     }
+
+    //Método para borrar jugadores
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> borrarJugador(@PathVariable("id") Long idJugador){
+        jugadorService.borrarJugador(idJugador);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //Formatear tabla de jugadores
+    @DeleteMapping("/limpiar-tabla")
+    public ResponseEntity<Void> formatearTabla(){
+        jugadorService.formatearJugadores();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //Formatear jugadores de una Liga
+    @DeleteMapping("/BorrarJugadoresPorLiga")
+    public ResponseEntity<Void> formatearJugadoresPorLiga(@RequestParam("LigaId") Long idLiga){
+        jugadorService.formatearJugadoresPorLiga(idLiga);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

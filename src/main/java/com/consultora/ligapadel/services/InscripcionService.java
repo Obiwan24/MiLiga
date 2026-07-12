@@ -93,4 +93,14 @@ public class InscripcionService {
     public List<Inscripcion> buscarTodos() {
         return inscripcionRepository.findAll();
     }
+
+    //Eliminar inscripcion
+    @Transactional
+    public void eliminarInscripcion(Long idInscripcion){
+        //Valida si existe la inscripcion
+        if (!inscripcionRepository.existsById(idInscripcion)) {
+            throw new RuntimeException("La inscripción con id " + idInscripcion + " no existe.");
+        }
+        inscripcionRepository.deleteById(idInscripcion);
+    }
 }

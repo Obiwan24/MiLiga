@@ -1,5 +1,6 @@
 package com.consultora.ligapadel.models;
 
+import com.consultora.ligapadel.enums.Posicion;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -30,9 +31,13 @@ public class Jugador {
     @Column(name="p_Perdidos")
     private int pPerdidos;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name="Posicion", nullable = false)
+    private Posicion posicion;
+
     // "mappedBy" hace que no se cree una nueva tabla sino que busca
     //la variable jugador en la clase jugadoresLiga
-    @OneToMany(mappedBy = "jugador", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jugador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inscripcion> inscripciones;
 
     //Getters y Setters
@@ -91,6 +96,14 @@ public class Jugador {
 
     public void setPPerdidos(int pPerdidos) {
         this.pPerdidos = pPerdidos;
+    }
+
+    public Posicion getPosicion(){
+        return posicion;
+    }
+
+    public void setPosicion(Posicion posicion){
+        this.posicion = posicion;
     }
 
 }
