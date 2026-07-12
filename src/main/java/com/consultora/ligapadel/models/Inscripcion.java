@@ -3,8 +3,8 @@ package com.consultora.ligapadel.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="jugadore_liga")
-public class JugadoresLiga {
+@Table(name="inscripciones")
+public class Inscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_Inscripcion", nullable = false)

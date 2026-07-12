@@ -1,8 +1,8 @@
 package com.consultora.ligapadel.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="jugadores")
@@ -30,10 +30,10 @@ public class Jugador {
     @Column(name="p_Perdidos")
     private int pPerdidos;
 
-    @ManyToOne
-    @JsonIgnore //Evitar bucles en la salida JSON
-    @JoinColumn(name="id_Equipo")
-    private Equipo equipo;
+    // "mappedBy" hace que no se cree una nueva tabla sino que busca
+    //la variable jugador en la clase jugadoresLiga
+    @OneToMany(mappedBy = "jugador", cascade = CascadeType.ALL)
+    private List<Inscripcion> inscripciones;
 
     //Getters y Setters
 
@@ -93,11 +93,4 @@ public class Jugador {
         this.pPerdidos = pPerdidos;
     }
 
-    public Equipo getEquipo() {
-        return equipo;
-    }
-
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
-    }
 }
