@@ -1,8 +1,11 @@
 package com.consultora.ligapadel.controllers;
 
+import com.consultora.ligapadel.models.Equipo;
 import com.consultora.ligapadel.models.Inscripcion;
 import com.consultora.ligapadel.services.InscripcionService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +31,23 @@ public class InscripcionController {
         List<Inscripcion> lista = inscripcionService.buscarTodos();
         //Responder con un 200 OK y se adjunta en la lista
         return ResponseEntity.ok(lista);
+    }
+
+    @DeleteMapping("/Borrar_inscripcion")
+    public ResponseEntity<Void> eliminarInscripcion(@PathVariable("id") Long idInscripcion) {
+        inscripcionService.eliminarInscripcion(idInscripcion);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //Modificar equipo
+    @PutMapping("/{id}")
+    public ResponseEntity<Inscripcion> modificarEquipo(
+            @PathVariable("id") Long idEquipo,
+            @RequestBody Inscripcion nuevosDatos) {
+        //Llama al método
+        Inscripcion inscripcionActualizada = inscripcionService.modificarInscripcion(idEquipo, nuevosDatos);
+
+        //Devuelve el equipo modificado
+        return new ResponseEntity<>(inscripcionActualizada, HttpStatus.OK);
     }
 }

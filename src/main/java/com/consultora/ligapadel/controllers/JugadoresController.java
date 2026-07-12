@@ -57,4 +57,16 @@ public class JugadoresController {
         jugadorService.formatearJugadoresPorLiga(idLiga);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    //Modificar jugador
+    @PutMapping("/{id}")
+    public ResponseEntity<Jugador> modificarJugador(
+            @PathVariable("id") Long idJugador,
+            @RequestBody Jugador datosNuevos) {
+        //Llama al método del servicio para modificar datos
+        Jugador jugadorActualizado = jugadorService.modificarJugador(idJugador, datosNuevos);
+
+        //Devuelve el jugador ya modificado
+        return new ResponseEntity<>(jugadorActualizado, HttpStatus.OK);
+    }
 }

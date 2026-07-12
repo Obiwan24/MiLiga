@@ -103,4 +103,20 @@ public class InscripcionService {
         }
         inscripcionRepository.deleteById(idInscripcion);
     }
+
+    //Modificar inscripcion
+    @Transactional
+    public Inscripcion modificarInscripcion(Long idInscripcion, Inscripcion nuevosDatos) {
+        //Busca inscripcion en la BBDD
+        Inscripcion inscripcionRegistrada = inscripcionRepository.findById(idInscripcion)
+                .orElseThrow(() -> new RuntimeException("La inscripción con id " + idInscripcion + " no existe."));
+
+        //Actualiza campos permitidos
+        inscripcionRegistrada.setEquipo(nuevosDatos.getEquipo());
+        inscripcionRegistrada.setLiga(nuevosDatos.getLiga());
+        inscripcionRegistrada.setJugador(nuevosDatos.getJugador());
+
+        //Guarda nuevos datos
+        return inscripcionRepository.save(nuevosDatos);
+    }
 }
