@@ -10,5 +10,5 @@ import java.util.List;
 public interface JugadorRepository extends JpaRepository<Jugador, Long> {
 
     //Busca en inscripciones y filtra por liga
-    List<Jugador> findbyInscripcionesLigaIdLiga(Long idLiga);
+    List<Jugador> findByInscripcionesLigaIdLiga(Long idLiga);
 }

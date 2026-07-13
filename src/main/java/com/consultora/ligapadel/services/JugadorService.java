@@ -43,7 +43,7 @@ public class JugadorService {
     @Transactional
     public void formatearJugadoresPorLiga(Long idLiga){
         //Buscamos los jugadores de la liga
-        List<Jugador> jugadoresLiga = jugadorRepository.findbyInscripcionesLigaIdLiga(idLiga);
+        List<Jugador> jugadoresLiga = jugadorRepository.findByInscripcionesLigaIdLiga(idLiga);
         //Si hay jugadores los borra
         if (!jugadoresLiga.isEmpty()) {
             jugadorRepository.deleteAll(jugadoresLiga);
