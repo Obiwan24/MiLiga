@@ -1,9 +1,7 @@
 package com.consultora.ligapadel.controllers;
 
-import com.consultora.ligapadel.models.Equipo;
 import com.consultora.ligapadel.models.Inscripcion;
 import com.consultora.ligapadel.services.InscripcionService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +29,11 @@ public class InscripcionController {
         List<Inscripcion> lista = inscripcionService.buscarTodos();
         //Responder con un 200 OK y se adjunta en la lista
         return ResponseEntity.ok(lista);
+    }
+
+    @GetMapping("/{id}")
+    public Inscripcion buscarInscripcion(@PathVariable Long idInscripcion) {
+        return inscripcionService.buscarInscripcion(idInscripcion);
     }
 
     @DeleteMapping("/Borrar_inscripcion")
