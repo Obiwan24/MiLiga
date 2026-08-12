@@ -19,12 +19,12 @@ public class InscripcionController {
     private InscripcionService inscripcionService;
 
     @PostMapping
-    public ResponseEntity<?> crearInscripcion(@RequestParam Long jugadorId,
+    public ResponseEntity<?> crearInscripcion(@RequestParam String dni,
                                               @RequestParam(required = false) Long equipoId,//(required = false) para que tenga en cuenta que no es necesario equipo con rol Admin.
                                               @RequestParam Long ligaId,
                                               @RequestParam Rol rolUsuario){
         //Llamada al servicio y guarda el resultado en una variable
-        Inscripcion resultado = inscripcionService.inscribirJugador(jugadorId, equipoId, ligaId, rolUsuario);
+        Inscripcion resultado = inscripcionService.inscribirJugador(dni, equipoId, ligaId, rolUsuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
     }
 

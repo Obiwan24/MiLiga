@@ -12,7 +12,7 @@ public class Inscripcion {
     private Long idInscripcion;
 
     @ManyToOne
-    @JoinColumn(name="id_Jugador", nullable = false)
+    @JoinColumn(name="dni_jugador", nullable = false)
     private Jugador jugador;
 
     @ManyToOne
@@ -41,7 +41,7 @@ public class Inscripcion {
         return jugador;
     }
 
-    public void setJugador(Jugador jugador) {
+    public void setJugador(Jugador dni) {
         this.jugador = jugador;
     }
 

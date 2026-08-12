@@ -28,8 +28,8 @@ public class JugadoresController {
     }
     //Método para buscar jugadores
     @GetMapping("/{id}")
-    public Jugador buscarJugador(@PathVariable Long id){
-        return jugadorRepository.findById(id).orElse(null);
+    public Jugador buscarJugador(@PathVariable String dni){
+        return jugadorRepository.findById(dni).orElse(null);
     }
 
     @GetMapping

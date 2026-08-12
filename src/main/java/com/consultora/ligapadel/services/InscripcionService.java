@@ -26,10 +26,10 @@ public class InscripcionService {
     private InscripcionRepository inscripcionRepository;
 
     @Transactional
-    public Inscripcion inscribirJugador(Long jugadorId, Long equipoId, Long ligaId, Rol rolUsuario) {
+    public Inscripcion inscribirJugador(String dni, Long equipoId, Long ligaId, Rol rolUsuario) {
         //Valida que el jugador exista en la BBDD
-        Jugador jugador = jugadorRepository.findById(jugadorId)
-                .orElseThrow(() -> new RuntimeException("Error: El jugador con ID " + jugadorId + " no existe."));
+        Jugador jugador = jugadorRepository.findById(dni)
+                .orElseThrow(() -> new RuntimeException("Error: El jugador con ID " + dni + " no existe."));
 
         //Valida que la liga existe
         Liga liga = ligaRepository.findById(ligaId)
@@ -80,9 +80,9 @@ public class InscripcionService {
     }
 
     @Transactional
-    public Inscripcion cambiarDeEquipo(Long jugadorId, Long ligaId, Long nuevoEquipoId){
+    public Inscripcion cambiarDeEquipo(String dni, Long ligaId, Long nuevoEquipoId){
         //Busca el jugador y en la liga
-        List<Inscripcion> inscripciones = inscripcionRepository.findByJugadorIdJugadorAndLigaIdLiga(jugadorId, ligaId);
+        List<Inscripcion> inscripciones = inscripcionRepository.findByJugadorDniAndLigaIdLiga(dni, ligaId);
         Inscripcion inscripcionActual = inscripciones.stream()
                 .filter(i -> i.getEquipo() != null)
                 .findFirst()
@@ -159,8 +159,8 @@ public class InscripcionService {
             }
         }
         //Obtiene inscripciones previas del jugador en la liga
-        List<Inscripcion> inscripcionesEnLiga = inscripcionRepository.findByJugadorIdJugadorAndLigaIdLiga(
-                jugador.getIdJugador(), liga.getIdLiga());
+        List<Inscripcion> inscripcionesEnLiga = inscripcionRepository.findByJugadorDniAndLigaIdLiga(
+                jugador.getDni(), liga.getIdLiga());
 
 
         //Regla de incompatibilidad de roles

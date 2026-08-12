@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface JugadorRepository extends JpaRepository<Jugador, Long> {
+public interface JugadorRepository extends JpaRepository<Jugador, String> {
 
     //Busca en inscripciones y filtra por liga
     List<Jugador> findByInscripcionesLigaIdLiga(Long idLiga);

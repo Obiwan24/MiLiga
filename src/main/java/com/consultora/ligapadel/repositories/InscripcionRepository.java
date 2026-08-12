@@ -17,10 +17,10 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
     //Optional<Inscripcion> cabe la posibilidad de que el jugador en una liga no exista todavia
     //finBy: Quiero hacer un SELECT
     //And: Le dice que incluya AND en el SQL
-    Optional<Inscripcion> findByJugadorIdJugadorAndLigaIdLiga(Long idJugador, Long idLiga, Rol rol);
+    Optional<Inscripcion> findByJugadorDniAndLigaIdLiga(String dni, Long idLiga, Rol rol);
 
     //Método para comprobar que un equipo ya tiene capitan
-    List<Inscripcion> findByJugadorIdJugadorAndLigaIdLiga(Long idJugador,Long idLiga);
+    List<Inscripcion> findByJugadorDniAndLigaIdLiga(String dni,Long idLiga);
         boolean existsByEquipoIdEquipoAndRolUsuario(Long idEquipo, Rol rol);
 
 }

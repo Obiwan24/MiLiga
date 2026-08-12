@@ -17,7 +17,7 @@ public class Jugador {
     private String nombre;
 
     @Id
-    @Column(name="DNI", nullable = false, unique = true, length = 100)
+    @Column(name="dni", nullable = false, unique = true, length = 100)
     private String dni;
 
     @Column(name="telefono", nullable = false, length = 9)
@@ -48,14 +48,14 @@ public class Jugador {
     private List<Inscripcion> inscripciones;
 
     //Getters y Setters
-
+/*
     public Long getIdJugador() {
         return idJugador;
     }
     public void setIdJugador(Long idJugador) {
         this.idJugador = idJugador;
     }
-
+*/
     public String getNombre() {
         return nombre;
     }
