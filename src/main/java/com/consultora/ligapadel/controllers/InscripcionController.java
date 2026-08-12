@@ -1,7 +1,9 @@
 package com.consultora.ligapadel.controllers;
 
+import com.consultora.ligapadel.enums.Rol;
 import com.consultora.ligapadel.models.Inscripcion;
 import com.consultora.ligapadel.services.InscripcionService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +19,13 @@ public class InscripcionController {
     private InscripcionService inscripcionService;
 
     @PostMapping
-    public ResponseEntity<?> crearInscripcion(@RequestParam Long jugadorId, @RequestParam Long equipoId, @RequestParam Long ligaId){
+    public ResponseEntity<?> crearInscripcion(@RequestParam Long jugadorId,
+                                              @RequestParam(required = false) Long equipoId,//(required = false) para que tenga en cuenta que no es necesario equipo con rol Admin.
+                                              @RequestParam Long ligaId,
+                                              @RequestParam Rol rolUsuario){
         //Llamada al servicio y guarda el resultado en una variable
-        Inscripcion resultado = inscripcionService.inscribirJugador(jugadorId, equipoId, ligaId);
-        return ResponseEntity.ok(resultado);
+        Inscripcion resultado = inscripcionService.inscribirJugador(jugadorId, equipoId, ligaId, rolUsuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
     }
 
     @GetMapping
@@ -32,11 +37,12 @@ public class InscripcionController {
     }
 
     @GetMapping("/{id}")
-    public Inscripcion buscarInscripcion(@PathVariable Long idInscripcion) {
-        return inscripcionService.buscarInscripcion(idInscripcion);
+    public ResponseEntity<Inscripcion> buscarInscripcion(@PathVariable("id") Long idInscripcion) {
+        Inscripcion resultado = inscripcionService.buscarInscripcion(idInscripcion);
+        return ResponseEntity.ok(resultado);
     }
 
-    @DeleteMapping("/Borrar_inscripcion")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarInscripcion(@PathVariable("id") Long idInscripcion) {
         inscripcionService.eliminarInscripcion(idInscripcion);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -45,10 +51,10 @@ public class InscripcionController {
     //Modificar equipo
     @PutMapping("/{id}")
     public ResponseEntity<Inscripcion> modificarEquipo(
-            @PathVariable("id") Long idEquipo,
+            @PathVariable("id") Long idInscripcion,
             @RequestBody Inscripcion nuevosDatos) {
         //Llama al método
-        Inscripcion inscripcionActualizada = inscripcionService.modificarInscripcion(idEquipo, nuevosDatos);
+        Inscripcion inscripcionActualizada = inscripcionService.modificarInscripcion(idInscripcion, nuevosDatos);
 
         //Devuelve el equipo modificado
         return new ResponseEntity<>(inscripcionActualizada, HttpStatus.OK);

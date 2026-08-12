@@ -1,16 +1,24 @@
 package com.consultora.ligapadel.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name="partidos")
-public class Partidos {
+public class Partido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="partidos", nullable = false)
     private Long idPartido;
+
+
+    @ManyToOne
+    @JoinColumn(name="Liga", nullable = false)
+    @JsonBackReference // Parte "hijo". Se detiene aqui, no vuelve a examinar la clase Liga, venimos de ella.
+    //Se puede usar tambien @JsonIgnore, para ignorar este campo al convertir a JSON
+    private Liga liga;
 
     @Column(name="eq_local")
     private String eqLocal;
@@ -44,15 +52,16 @@ public class Partidos {
     public Long getIdPartido() {
         return idPartido;
     }
-
     public void setIdPartido(Long idPartido) {
         this.idPartido = idPartido;
     }
 
+    public Liga getLiga() {return liga; }
+    public void setLiga(Liga liga) {this.liga = liga; }
+
     public String getEqLocal() {
         return eqLocal;
     }
-
     public void setEqLocal(String eqLocal) {
         this.eqLocal = eqLocal;
     }
@@ -60,7 +69,6 @@ public class Partidos {
     public String getEqVisitante() {
         return eqVisitante;
     }
-
     public void setEqVisitante(String eqVisitante) {
         this.eqVisitante = eqVisitante;
     }
@@ -68,7 +76,6 @@ public class Partidos {
     public int getjLocal() {
         return jLocal;
     }
-
     public void setjLocal(int jLocal) {
         this.jLocal = jLocal;
     }
@@ -76,7 +83,6 @@ public class Partidos {
     public int getjVisitante() {
         return jVisitante;
     }
-
     public void setjVisitante(int jVisitante) {
         this.jVisitante = jVisitante;
     }
@@ -84,7 +90,6 @@ public class Partidos {
     public int getSetLocal() {
         return setLocal;
     }
-
     public void setSetLocal(int setLocal) {
         this.setLocal = setLocal;
     }
@@ -92,7 +97,6 @@ public class Partidos {
     public int getSetVisitante() {
         return setVisitante;
     }
-
     public void setSetVisitante(int setVisitante) {
         this.setVisitante = setVisitante;
     }
@@ -100,7 +104,6 @@ public class Partidos {
     public String getGanador() {
         return ganador;
     }
-
     public void setGanador(String ganador) {
         this.ganador = ganador;
     }
@@ -108,7 +111,6 @@ public class Partidos {
     public Date getFecha() {
         return fecha;
     }
-
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
@@ -116,7 +118,6 @@ public class Partidos {
     public int getJornada() {
         return jornada;
     }
-
     public void setJornada(int jornada) {
         this.jornada = jornada;
     }

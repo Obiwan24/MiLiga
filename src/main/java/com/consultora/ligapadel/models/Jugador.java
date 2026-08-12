@@ -19,6 +19,12 @@ public class Jugador {
     @Column(name="DNI", nullable = false, length = 100)
     private String dni;
 
+    @Column(name="telefono", nullable = false, length = 9)
+    private int tlfn;
+
+    @Column(name="email", nullable = false)
+    private String email;
+
     @Column(name="j_Ganados")
     private int jGanados;
 
@@ -32,7 +38,7 @@ public class Jugador {
     private int pPerdidos;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="Posicion", nullable = false)
+    @Column(name="Posicion", nullable = false, length = 10)
     private Posicion posicion;
 
     // "mappedBy" hace que no se cree una nueva tabla sino que busca
@@ -45,7 +51,6 @@ public class Jugador {
     public Long getIdJugador() {
         return idJugador;
     }
-
     public void setIdJugador(Long idJugador) {
         this.idJugador = idJugador;
     }
@@ -53,7 +58,6 @@ public class Jugador {
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -61,7 +65,6 @@ public class Jugador {
     public String getDni() {
         return dni;
     }
-
     public void setDni(String dni) {
         this.dni = dni;
     }
@@ -69,7 +72,6 @@ public class Jugador {
     public int getJGanados() {
         return jGanados;
     }
-
     public void setJGanados(int jGanados) {
         this.jGanados = jGanados;
     }
@@ -77,7 +79,6 @@ public class Jugador {
     public int getJPerdidos() {
         return jPerdidos;
     }
-
     public void setJPerdidos(int jPerdidos) {
         this.jPerdidos = jPerdidos;
     }
@@ -85,7 +86,6 @@ public class Jugador {
     public int getPGanados() {
         return pGanados;
     }
-
     public void setPGanados(int pGanados) {
         this.pGanados = pGanados;
     }
@@ -93,7 +93,6 @@ public class Jugador {
     public int getPPerdidos() {
         return pPerdidos;
     }
-
     public void setPPerdidos(int pPerdidos) {
         this.pPerdidos = pPerdidos;
     }
@@ -101,9 +100,12 @@ public class Jugador {
     public Posicion getPosicion(){
         return posicion;
     }
+    public void setPosicion(Posicion posicion){ this.posicion = posicion; }
 
-    public void setPosicion(Posicion posicion){
-        this.posicion = posicion;
-    }
+    public int getTlfn() { return tlfn; }
+    public void setTlfn(int tlfn) {this.tlfn = tlfn; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
 }

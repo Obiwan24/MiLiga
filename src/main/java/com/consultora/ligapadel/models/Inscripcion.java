@@ -1,5 +1,6 @@
 package com.consultora.ligapadel.models;
 
+import com.consultora.ligapadel.enums.Rol;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,16 +12,20 @@ public class Inscripcion {
     private Long idInscripcion;
 
     @ManyToOne
-    @JoinColumn(name="id_Jugador")
+    @JoinColumn(name="id_Jugador", nullable = false)
     private Jugador jugador;
 
     @ManyToOne
-    @JoinColumn(name="id_Liga")
+    @JoinColumn(name="id_Liga", nullable = false)
     private Liga liga;
 
     @ManyToOne
     @JoinColumn(name="id_Equipo")
     private Equipo equipo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="rol", nullable = false)
+    private Rol rolUsuario;
 
     //Getters y Setters
 
@@ -54,5 +59,13 @@ public class Inscripcion {
 
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
+    }
+
+    public Rol getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public void setRolUsuario(Rol rolUsuario) {
+        this.rolUsuario = rolUsuario;
     }
 }

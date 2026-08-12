@@ -2,6 +2,7 @@ package com.consultora.ligapadel.controllers;
 
 import com.consultora.ligapadel.models.Liga;
 import com.consultora.ligapadel.repositories.LigaRepository;
+import com.consultora.ligapadel.services.LigaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,10 @@ import java.util.List;
 public class LigaController {
 
     @Autowired
-    private LigaRepository ligaRepository; // Inyecta el repositorio creado
+    private LigaService ligaService; // Referencia al service de la Liga
+
+    @Autowired
+    private LigaRepository ligaRepository;
 
     //Endpoint para obtener todas las ligas
     @GetMapping //GETMapping para obtener un dato de la tabla
@@ -23,7 +27,7 @@ public class LigaController {
     //Método para guardar datos
     @PostMapping //POSTMappìng para escribir un dato en la tabla
     public Liga crearLiga(@RequestBody Liga nuevaLiga) {
-        return ligaRepository.save(nuevaLiga);
+        return ligaService.crearLiga(nuevaLiga);
     }
 
     //Método para buscar liga por ID

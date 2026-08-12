@@ -14,13 +14,13 @@ public class Equipo {
     private Long idEquipo;
 
 
-    @Column(name="nombre_equipo")
+    @Column(name="nombre_equipo", nullable = false)
     private String nombreEquipo;
 
     @Column(name="num_jugadores")
     private int numJugadores = 0;
 
-    @Column(name="sede")
+    @Column(name="sede", nullable = false)
     private String sede;
 
     @Column(name="puntos")
@@ -133,5 +133,10 @@ public class Equipo {
 
     public void setLiga(Liga liga) {
         this.liga = liga;
+    }
+
+    //Logica de negocio
+    public void incrementarJugadoresEquipo() {
+        this.numJugadores++;
     }
 }

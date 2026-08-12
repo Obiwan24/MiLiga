@@ -1,8 +1,10 @@
 package com.consultora.ligapadel.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="ligas") // Como se llamará la tabla en DBeaver
@@ -16,14 +18,15 @@ public class Liga {
     @Column(name = "nombre_liga", nullable = false, length = 100) // Debe tener nombre
     private String nombreLiga;
 
-    @Column(name = "ambito")
+    @Column(name = "ambito", nullable = false)
     private String ambito;
 
     @Column(name = "numero_equipos")
-    private int numeroEquipos = 0;
+    private int numEquipos = 0;
 
     @Column(name = "numero_jugadores")
-    private int numeroJugadores = 0;
+
+    private int numJugadores = 0;
 
     @Column(name = "fecha_inicio_inscripcion")
     private LocalDate fechaInicioInscr;
@@ -36,6 +39,10 @@ public class Liga {
 
     @Column(name = "fecha_fin_liga")
     private LocalDate fechaFinLiga;
+
+    @OneToMany(mappedBy = "liga", cascade = CascadeType.ALL)
+    @JsonManagedReference // (parte "padre")Serializa la lista con normalidad, evita bucle infinito
+    public List<Partido> partidos;
 
     public Long getIdLiga() {
         return idLiga;
@@ -62,19 +69,19 @@ public class Liga {
     }
 
     public int getNumeroEquipos() {
-        return numeroEquipos;
+        return numEquipos;
     }
 
     public void setNumeroEquipos(int numeroEquipos) {
-        this.numeroEquipos = numeroEquipos;
+        this.numEquipos = numeroEquipos;
     }
 
-    public int getNumeroJugadores() {
-        return numeroJugadores;
+    public int getNumJugadores() {
+        return numJugadores;
     }
 
-    public void setNumeroJugadores(int numeroJugadores) {
-        this.numeroJugadores = numeroJugadores;
+    public void setNumJugadores(int numJugadores) {
+        this.numJugadores = numJugadores;
     }
 
     public LocalDate getFechaInicioInscr() {
@@ -107,5 +114,10 @@ public class Liga {
 
     public void setFechaFinLiga(LocalDate fechaFinLiga) {
         this.fechaFinLiga = fechaFinLiga;
+    }
+
+    //Logica de negocio
+    public void incrementarJugadoresLiga() {
+        this.numJugadores++;
     }
 }
