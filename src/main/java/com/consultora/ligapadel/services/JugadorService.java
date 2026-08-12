@@ -24,13 +24,13 @@ public class JugadorService {
 
     //Método para borra un jugador
     @Transactional
-    public void borrarJugador(Long idJugador){
+    public void borrarJugador(String dni){
         //Valida si existe el jugador en la BBDD
-        if (!jugadorRepository.existsById(idJugador)){
-            throw new RuntimeException("El jugador con id: " + idJugador + " no existe.");
+        if (!jugadorRepository.existsById(dni)){
+            throw new RuntimeException("El jugador con id: " + dni + " no existe.");
         }
         //Se borra el jugador de la BBDD
-        jugadorRepository.deleteById(idJugador);
+        jugadorRepository.deleteById(dni);
     }
 
     //Método para formatear la tabla de jugadores
@@ -51,10 +51,10 @@ public class JugadorService {
     }
 
     @Transactional
-    public Jugador modificarJugador(Long idJugador, Jugador datosNuevos) {
+    public Jugador modificarJugador(String dni, Jugador datosNuevos) {
         //Buscamos al jugador en la base de datos
-        Jugador jugadorRegistrado = jugadorRepository.findById(idJugador)
-                .orElseThrow(() -> new RuntimeException("El jugador con id " + idJugador +" no está registrado."));
+        Jugador jugadorRegistrado = jugadorRepository.findById(dni)
+                .orElseThrow(() -> new RuntimeException("El jugador con id " + dni +" no está registrado."));
 
         //Actualiza campos permitidos
         jugadorRegistrado.setNombre(datosNuevos.getNombre());

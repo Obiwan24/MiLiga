@@ -39,8 +39,8 @@ public class JugadoresController {
 
     //Método para borrar jugadores
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> borrarJugador(@PathVariable("id") Long idJugador){
-        jugadorService.borrarJugador(idJugador);
+    public ResponseEntity<Void> borrarJugador(@PathVariable("id") String dni){
+        jugadorService.borrarJugador(dni);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -61,10 +61,10 @@ public class JugadoresController {
     //Modificar jugador
     @PutMapping("/{id}")
     public ResponseEntity<Jugador> modificarJugador(
-            @PathVariable("id") Long idJugador,
+            @PathVariable("id") String dni,
             @RequestBody Jugador datosNuevos) {
         //Llama al método del servicio para modificar datos
-        Jugador jugadorActualizado = jugadorService.modificarJugador(idJugador, datosNuevos);
+        Jugador jugadorActualizado = jugadorService.modificarJugador(dni, datosNuevos);
 
         //Devuelve el jugador ya modificado
         return new ResponseEntity<>(jugadorActualizado, HttpStatus.OK);

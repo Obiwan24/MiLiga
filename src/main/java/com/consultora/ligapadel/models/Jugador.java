@@ -8,15 +8,16 @@ import java.util.List;
 @Entity
 @Table(name="jugadores")
 public class Jugador {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_Jugador", nullable = false)
-    private Long idJugador;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name="id_Jugador", nullable = false)
+    //private Long idJugador;
 
     @Column(name="nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(name="DNI", nullable = false, length = 100)
+    @Id
+    @Column(name="DNI", nullable = false, unique = true, length = 100)
     private String dni;
 
     @Column(name="telefono", nullable = false, length = 9)
