@@ -24,7 +24,7 @@ public class JugadorService {
 
     //Método para borra un jugador
     @Transactional
-    public void borrarJugador(String dni){
+    public void borrarJugadorPorDni(String dni){
         //Valida si existe el jugador en la BBDD
         if (!jugadorRepository.existsById(dni)){
             throw new RuntimeException("El jugador con id: " + dni + " no existe.");

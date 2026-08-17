@@ -40,7 +40,7 @@ public class JugadoresController {
     //Método para borrar jugadores
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> borrarJugador(@PathVariable("id") String dni){
-        jugadorService.borrarJugador(dni);
+        jugadorService.borrarJugadorPorDni(dni);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

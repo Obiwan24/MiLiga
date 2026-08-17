@@ -37,4 +37,28 @@ public class EquipoService {
         //Guarda el equipo en su tabla
         return equipoRepository.save(nuevoEquipo);
     }
+
+    //Eliminar equipo
+    @Transactional
+    public void borrarEquipo(Long idEquipo) {
+        //Validar si existe el equipo
+        if (!equipoRepository.existsById(idEquipo)) {
+            throw new RuntimeException("El equipo " + idEquipo + " no existe.");
+        }
+        equipoRepository.deleteById(idEquipo);
+    }
+
+    //Modificar equipo
+    @Transactional
+    public Equipo modificarEquipo(Long idEquipo, Equipo datosNuevos) {
+        //Buscamos equipo en la bbdd
+        Equipo equipoRegistrado = equipoRepository.findById(idEquipo)
+                .orElseThrow(() -> new RuntimeException("El equipo con " + idEquipo + " no está registrado."));
+
+        //Actualiza campos del equipo
+        equipoRegistrado.setNombreEquipo(datosNuevos.getNombreEquipo());
+        equipoRegistrado.setLiga(datosNuevos.getLiga());
+
+        return equipoRepository.save(datosNuevos);
+    }
 }

@@ -4,6 +4,8 @@ import com.consultora.ligapadel.models.Equipo;
 import com.consultora.ligapadel.repositories.EquipoRepository;
 import com.consultora.ligapadel.services.EquipoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -33,5 +35,24 @@ public class EquipoController {
     @GetMapping
     public List<Equipo> listarTodosEquipos(){
         return equipoRepository.findAll();
+    }
+
+    //Borrar equipo
+    @DeleteMapping
+    public ResponseEntity<Void> borrarEquipo(@PathVariable("id") Long idEquipo) {
+        equipoService.borrarEquipo(idEquipo);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //Modificar equipo
+    @PutMapping("/{id}")
+    public ResponseEntity<Equipo> modificarEquipo(@PathVariable("id") Long idEquipo,
+                                                  @RequestBody Equipo datosNuevos) {
+        //Llamar metodo para modificar los datos
+        Equipo equipoActualizado = equipoService.modificarEquipo(idEquipo, datosNuevos);
+
+        //Devuelve equipo modificado
+        return new ResponseEntity<>(equipoActualizado, HttpStatus.OK);
+
     }
 }
