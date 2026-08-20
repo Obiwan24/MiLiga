@@ -1,30 +1,41 @@
 package com.consultora.ligapadel.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.consultora.ligapadel.enums.EstadoPartido;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="partidos")
 public class Partido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="partidos", nullable = false)
+    @Column(name="id_partido", nullable = false)
     private Long idPartido;
 
+    @ManyToOne
+    @JoinColumn(name="id_Enfrentamiento", nullable = false)
+    @JsonIgnore
+    private Enfrentamiento enfrentamiento;
+
+    private Integer orden;
 
     @ManyToOne
-    @JoinColumn(name="Liga", nullable = false)
-    @JsonBackReference // Parte "hijo". Se detiene aqui, no vuelve a examinar la clase Liga, venimos de ella.
-    //Se puede usar tambien @JsonIgnore, para ignorar este campo al convertir a JSON
-    private Liga liga;
+    @JoinColumn(name="id_jugador1_local")
+    private Inscripcion jugador1Local;
 
-    @Column(name="eq_local")
-    private String eqLocal;
+    @ManyToOne
+    @JoinColumn(name="id_jugador2_local")
+    private Inscripcion jugador2Local;
 
-    @Column(name="eq_visitante")
-    private String eqVisitante;
+    @ManyToOne
+    @JoinColumn(name="id_jugador1_visitante")
+    private Inscripcion jugador1Visitante;
+
+    @ManyToOne
+    @JoinColumn(name="id_jugador2_visitante")
+    private Inscripcion jugador2Visitante;
 
     @Column(name="j_local")
     private int jLocal = 0;
@@ -42,10 +53,11 @@ public class Partido {
     private String ganador;
 
     @Column(name="fecha")
-    private Date fecha;
+    private LocalDateTime fecha;
 
-    @Column(name="jornada")
-    private int jornada = 1;
+    @Enumerated(EnumType.STRING)
+    @Column(name="estado_partido", nullable = false, length = 30)
+    private EstadoPartido estado;
 
     //Getters y Setters
 
@@ -54,23 +66,6 @@ public class Partido {
     }
     public void setIdPartido(Long idPartido) {
         this.idPartido = idPartido;
-    }
-
-    public Liga getLiga() {return liga; }
-    public void setLiga(Liga liga) {this.liga = liga; }
-
-    public String getEqLocal() {
-        return eqLocal;
-    }
-    public void setEqLocal(String eqLocal) {
-        this.eqLocal = eqLocal;
-    }
-
-    public String getEqVisitante() {
-        return eqVisitante;
-    }
-    public void setEqVisitante(String eqVisitante) {
-        this.eqVisitante = eqVisitante;
     }
 
     public int getjLocal() {
@@ -108,17 +103,49 @@ public class Partido {
         this.ganador = ganador;
     }
 
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
-    public int getJornada() {
-        return jornada;
+    public Integer getOrden() { return orden; }
+    public void setOrden(Integer orden) { this.orden = orden; }
+
+    public Enfrentamiento getEnfrentamiento() { return enfrentamiento; }
+    public void setEnfrentamiento(Enfrentamiento enfrentamiento) { this.enfrentamiento = enfrentamiento; }
+
+    public EstadoPartido getEstado() {return estado;}
+    public void setEstado(EstadoPartido estado) {this.estado = estado;}
+
+    //Get&Set jugadores
+
+    public Inscripcion getJugador1Local() {
+        return jugador1Local;
     }
-    public void setJornada(int jornada) {
-        this.jornada = jornada;
+    public void setJugador1Local(Inscripcion jugador1Local) {
+        this.jugador1Local = jugador1Local;
+    }
+
+    public Inscripcion getJugador2Local() {
+        return jugador2Local;
+    }
+    public void setJugador2Local(Inscripcion jugador2Local) {
+        this.jugador2Local = jugador2Local;
+    }
+
+    public Inscripcion getJugador1Visitante() {
+        return jugador1Visitante;
+    }
+    public void setJugador1Visitante(Inscripcion jugador1Visitante) {
+        this.jugador1Visitante = jugador1Visitante;
+    }
+
+    public Inscripcion getJugador2Visitante() {
+        return jugador2Visitante;
+    }
+    public void setJugador2Visitante(Inscripcion jugador2Visitante) {
+        this.jugador2Visitante = jugador2Visitante;
     }
 }

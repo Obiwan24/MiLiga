@@ -48,14 +48,7 @@ public class Jugador {
     private List<Inscripcion> inscripciones;
 
     //Getters y Setters
-/*
-    public Long getIdJugador() {
-        return idJugador;
-    }
-    public void setIdJugador(Long idJugador) {
-        this.idJugador = idJugador;
-    }
-*/
+
     public String getNombre() {
         return nombre;
     }
