@@ -34,8 +34,9 @@ public class Enfrentamiento {
     @Column(name="fecha_fin_enfrentamiento")
     private LocalDate fechaFinEnfrentamiento;
 
-    @Column(name="jornada", nullable = false)
-    private int jornada;
+    @ManyToOne
+    @JoinColumn(name="id_jornada", nullable = false)
+    private Jornada jornada;
 
     @OneToMany(mappedBy = "enfrentamiento", cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<Partido> partidos = new ArrayList<>();
@@ -80,8 +81,8 @@ public class Enfrentamiento {
     public LocalDate getFechaFinEnfrentamiento() {return fechaFinEnfrentamiento;}
     public void setFechaFinEnfrentamiento(LocalDate fechaFinEnfrentamiento) {this.fechaFinEnfrentamiento = fechaFinEnfrentamiento;}
 
-    public int getJornada() {return jornada;}
-    public void setJornada(int jornada) {this.jornada = jornada;}
+    public Jornada getJornada() {return jornada;}
+    public void setJornada(Jornada jornada) {this.jornada = jornada;}
 
     public String getObservaciones() {return observaciones;}
     public void setObservaciones(String observaciones) {this.observaciones = observaciones;}

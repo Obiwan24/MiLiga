@@ -59,6 +59,9 @@ public class Partido {
     @Column(name="estado_partido", nullable = false, length = 30)
     private EstadoPartido estado;
 
+    @Column(name="lugar", nullable = false)
+    private String lugar;
+
     //Getters y Setters
 
     public Long getIdPartido() {
@@ -118,6 +121,9 @@ public class Partido {
 
     public EstadoPartido getEstado() {return estado;}
     public void setEstado(EstadoPartido estado) {this.estado = estado;}
+
+    public String getLugar() { return lugar; }
+    public void setLugar(String lugar) { this.lugar = lugar; }
 
     //Get&Set jugadores
 
