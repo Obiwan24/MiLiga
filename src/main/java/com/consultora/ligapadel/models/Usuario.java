@@ -6,12 +6,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="jugadores")
-public class Jugador {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name="id_Jugador", nullable = false)
-    //private Long idJugador;
+@Table(name="usuarios")
+public class Usuario {
 
     @Column(name="nombre", nullable = false, length = 100)
     private String nombre;
@@ -44,7 +40,7 @@ public class Jugador {
 
     // "mappedBy" hace que no se cree una nueva tabla sino que busca
     //la variable jugador en la clase jugadoresLiga
-    @OneToMany(mappedBy = "jugador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inscripcion> inscripciones;
 
     //Getters y Setters

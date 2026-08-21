@@ -3,7 +3,7 @@ package com.consultora.ligapadel.services;
 import com.consultora.ligapadel.models.Equipo;
 import com.consultora.ligapadel.models.Liga;
 import com.consultora.ligapadel.repositories.EquipoRepository;
-import com.consultora.ligapadel.repositories.JugadorRepository;
+import com.consultora.ligapadel.repositories.UsuarioRepository;
 import com.consultora.ligapadel.repositories.LigaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class EquipoService {
     private EquipoRepository equipoRepository;
 
     @Autowired
-    private JugadorRepository jugadorRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private LigaRepository ligaRepository;

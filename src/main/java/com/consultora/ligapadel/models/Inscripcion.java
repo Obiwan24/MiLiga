@@ -12,8 +12,8 @@ public class Inscripcion {
     private Long idInscripcion;
 
     @ManyToOne
-    @JoinColumn(name="dni_jugador", nullable = false)
-    private Jugador jugador;
+    @JoinColumn(name="dni_usuario", nullable = false)
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name="id_Liga", nullable = false)
@@ -32,23 +32,18 @@ public class Inscripcion {
     public Long getIdInscripcion() {
         return idInscripcion;
     }
-
     public void setIdInscripcion(Long idInscripcion) {
         this.idInscripcion = idInscripcion;
     }
 
-    public Jugador getJugador() {
-        return jugador;
+    public Usuario getUsuario() {
+        return usuario;
     }
-
-    public void setJugador(Jugador dni) {
-        this.jugador = jugador;
-    }
+    public void setUsuario(Usuario dni) {this.usuario = usuario;}
 
     public Liga getLiga() {
         return liga;
     }
-
     public void setLiga(Liga liga) {
         this.liga = liga;
     }
@@ -56,7 +51,6 @@ public class Inscripcion {
     public Equipo getEquipo() {
         return equipo;
     }
-
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
@@ -64,7 +58,6 @@ public class Inscripcion {
     public Rol getRolUsuario() {
         return rolUsuario;
     }
-
     public void setRolUsuario(Rol rolUsuario) {
         this.rolUsuario = rolUsuario;
     }

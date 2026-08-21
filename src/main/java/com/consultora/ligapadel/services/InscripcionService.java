@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class InscripcionService {
 
     @Autowired
-    private JugadorRepository jugadorRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private LigaRepository ligaRepository;
@@ -26,10 +25,10 @@ public class InscripcionService {
     private InscripcionRepository inscripcionRepository;
 
     @Transactional
-    public Inscripcion inscribirJugador(String dni, Long equipoId, Long ligaId, Rol rolUsuario) {
-        //Valida que el jugador exista en la BBDD
-        Jugador jugador = jugadorRepository.findById(dni)
-                .orElseThrow(() -> new RuntimeException("Error: El jugador con ID " + dni + " no existe."));
+    public Inscripcion inscribirUsuario(String dni, Long equipoId, Long ligaId, Rol rolUsuario) {
+        //Valida que el usuario exista en la BBDD
+        Usuario usuario = usuarioRepository.findById(dni)
+                .orElseThrow(() -> new RuntimeException("Error: El usuario con ID " + dni + " no existe."));
 
         //Valida que la liga existe
         Liga liga = ligaRepository.findById(ligaId)
@@ -45,17 +44,17 @@ public class InscripcionService {
         }
 
         //Ejecuta la validacion
-        validarRolEnLiga(jugador, liga, equipo, rolUsuario);
+        validarRolEnLiga(usuario, liga, equipo, rolUsuario);
 
         //Comprobación de duplicados
-        if (inscripcionRepository.existsByJugadorAndLiga(jugador, liga, rolUsuario)) {
+        if (inscripcionRepository.existsByUsuarioAndLiga(usuario, liga, rolUsuario)) {
             throw new IllegalArgumentException("El jugador ya existe en la liga seleccionada");
         }
 
         if (equipo != null) {
-            //Modifica contador de numero de jugadores y equipos
+            //Modifica contador de numero de usuarios y equipos
             equipo.incrementarJugadoresEquipo();
-            liga.incrementarJugadoresLiga();
+            liga.incrementarInscripcionesLiga();
         }
 
         //El repositorio de equipos guarda el equipo con el nuevo numero
@@ -65,10 +64,10 @@ public class InscripcionService {
 
         ligaRepository.save(liga);
 
-        //Crea inscripcion del jugador
+        //Crea inscripcion del usuario
         //Crea el objeto de la tabla intermedia y asociamos las relaciones
         Inscripcion nuevaInscripcion = new Inscripcion();
-        nuevaInscripcion.setJugador(jugador);
+        nuevaInscripcion.setUsuario(usuario);
         nuevaInscripcion.setEquipo(equipo);
         nuevaInscripcion.setLiga(liga);
         nuevaInscripcion.setRolUsuario(rolUsuario);
@@ -81,8 +80,8 @@ public class InscripcionService {
 
     @Transactional
     public Inscripcion cambiarDeEquipo(String dni, Long ligaId, Long nuevoEquipoId){
-        //Busca el jugador y en la liga
-        List<Inscripcion> inscripciones = inscripcionRepository.findByJugadorDniAndLigaIdLiga(dni, ligaId);
+        //Busca el usuario y en la liga
+        List<Inscripcion> inscripciones = inscripcionRepository.findByUsuarioDniAndLigaIdLiga(dni, ligaId);
         Inscripcion inscripcionActual = inscripciones.stream()
                 .filter(i -> i.getEquipo() != null)
                 .findFirst()
@@ -140,14 +139,14 @@ public class InscripcionService {
         //Actualiza campos permitidos
         inscripcionRegistrada.setEquipo(nuevosDatos.getEquipo());
         inscripcionRegistrada.setLiga(nuevosDatos.getLiga());
-        inscripcionRegistrada.setJugador(nuevosDatos.getJugador());
+        inscripcionRegistrada.setUsuario(nuevosDatos.getUsuario());
 
         //Guarda nuevos datos
         return inscripcionRepository.save(inscripcionRegistrada);
     }
 
     //Método para validar el rol
-    private boolean validarRolEnLiga(Jugador jugador, Liga liga,Equipo equipo, Rol nuevoRol) {
+    private boolean validarRolEnLiga(Usuario usuario, Liga liga, Equipo equipo, Rol nuevoRol) {
         if(nuevoRol == Rol.CAPITAN) {
             if (equipo == null) {
                 throw new IllegalArgumentException("Para ser capitan debes indicar un equipo.");
@@ -159,8 +158,8 @@ public class InscripcionService {
             }
         }
         //Obtiene inscripciones previas del jugador en la liga
-        List<Inscripcion> inscripcionesEnLiga = inscripcionRepository.findByJugadorDniAndLigaIdLiga(
-                jugador.getDni(), liga.getIdLiga());
+        List<Inscripcion> inscripcionesEnLiga = inscripcionRepository.findByUsuarioDniAndLigaIdLiga
+                (usuario.getDni(), liga.getIdLiga());
 
 
         //Regla de incompatibilidad de roles

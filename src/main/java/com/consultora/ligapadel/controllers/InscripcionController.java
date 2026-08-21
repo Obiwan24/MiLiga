@@ -3,7 +3,6 @@ package com.consultora.ligapadel.controllers;
 import com.consultora.ligapadel.enums.Rol;
 import com.consultora.ligapadel.models.Inscripcion;
 import com.consultora.ligapadel.services.InscripcionService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ public class InscripcionController {
                                               @RequestParam Long ligaId,
                                               @RequestParam Rol rolUsuario){
         //Llamada al servicio y guarda el resultado en una variable
-        Inscripcion resultado = inscripcionService.inscribirJugador(dni, equipoId, ligaId, rolUsuario);
+        Inscripcion resultado = inscripcionService.inscribirUsuario(dni, equipoId, ligaId, rolUsuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
     }
 

@@ -1,14 +1,14 @@
 package com.consultora.ligapadel.repositories;
 
-import com.consultora.ligapadel.models.Jugador;
+import com.consultora.ligapadel.models.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface JugadorRepository extends JpaRepository<Jugador, String> {
+public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
     //Busca en inscripciones y filtra por liga
-    List<Jugador> findByInscripcionesLigaIdLiga(Long idLiga);
+    List<Usuario> findByInscripcionesLigaIdLiga(Long idLiga);
 }

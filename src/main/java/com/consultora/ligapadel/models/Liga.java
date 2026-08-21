@@ -24,9 +24,9 @@ public class Liga {
     @Column(name = "numero_equipos")
     private int numEquipos = 0;
 
-    @Column(name = "numero_jugadores")
+    @Column(name = "numero_inscripciones")
 
-    private int numJugadores = 0;
+    private int numInscripciones = 0;
 
     @Column(name = "fecha_inicio_inscripcion")
     private LocalDate fechaInicioInscr;
@@ -47,7 +47,6 @@ public class Liga {
     public Long getIdLiga() {
         return idLiga;
     }
-
     public void setIdLiga(Long idLiga) {
         this.idLiga = idLiga;
     }
@@ -55,7 +54,6 @@ public class Liga {
     public String getNombreLiga() {
         return nombreLiga;
     }
-
     public void setNombreLiga(String nombreLiga) {
         this.nombreLiga = nombreLiga;
     }
@@ -63,7 +61,6 @@ public class Liga {
     public String getAmbito() {
         return ambito;
     }
-
     public void setAmbito(String ambito) {
         this.ambito = ambito;
     }
@@ -71,23 +68,20 @@ public class Liga {
     public int getNumeroEquipos() {
         return numEquipos;
     }
-
     public void setNumeroEquipos(int numeroEquipos) {
         this.numEquipos = numeroEquipos;
     }
 
-    public int getNumJugadores() {
-        return numJugadores;
+    public int getNumInscripciones() {
+        return numInscripciones;
     }
-
-    public void setNumJugadores(int numJugadores) {
-        this.numJugadores = numJugadores;
+    public void setNumInscripciones(int numInscripciones) {
+        this.numInscripciones = numInscripciones;
     }
 
     public LocalDate getFechaInicioInscr() {
         return fechaInicioInscr;
     }
-
     public void setFechaInicioInscr(LocalDate fechaInicioInscr) {
         this.fechaInicioInscr = fechaInicioInscr;
     }
@@ -95,7 +89,6 @@ public class Liga {
     public LocalDate getFechaFinInscr() {
         return fechaFinInscr;
     }
-
     public void setFechaFinInscr(LocalDate fechaFinInscr) {
         this.fechaFinInscr = fechaFinInscr;
     }
@@ -103,7 +96,6 @@ public class Liga {
     public LocalDate getFechaInicioLiga() {
         return fechaInicioLiga;
     }
-
     public void setFechaInicioLiga(LocalDate fechaInicioLiga) {
         this.fechaInicioLiga = fechaInicioLiga;
     }
@@ -111,14 +103,13 @@ public class Liga {
     public LocalDate getFechaFinLiga() {
         return fechaFinLiga;
     }
-
     public void setFechaFinLiga(LocalDate fechaFinLiga) {
         this.fechaFinLiga = fechaFinLiga;
     }
 
     //Logica de negocio
-    public void incrementarJugadoresLiga() {
-        this.numJugadores++;
+    public void incrementarInscripcionesLiga() {
+        this.numInscripciones++;
     }
 
     public void incrementarEquiposLiga() { this.numEquipos++; }
