@@ -42,7 +42,7 @@ public class Liga {
 
     @OneToMany(mappedBy = "liga", cascade = CascadeType.ALL)
     @JsonManagedReference // (parte "padre")Serializa la lista con normalidad, evita bucle infinito
-    public List<Partido> partidos;
+    public List<Enfrentamiento> enfrentamientos;
 
     public Long getIdLiga() {
         return idLiga;
@@ -120,4 +120,6 @@ public class Liga {
     public void incrementarJugadoresLiga() {
         this.numJugadores++;
     }
+
+    public void incrementarEquiposLiga() { this.numEquipos++; }
 }
